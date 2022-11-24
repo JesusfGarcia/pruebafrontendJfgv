@@ -41,7 +41,12 @@ export default function Table() {
               <tr key={`product${product.id}`}>
                 <td>
                   <div className="name-image">
-                    <img alt="product-logo" src={product.productImage} />
+                    <img
+                      loading="lazy"
+                      alt="product-logo"
+                      src={product.productImage}
+                      height="80px"
+                    />
                     <span>{product.name}</span>
                   </div>
                 </td>

@@ -1,5 +1,56 @@
 import React from "react";
+import ReactApexChart from "react-apexcharts";
+
+import { getProductsPresence } from "../../services";
+import Card from "../Card";
 
 export default function PresenceChart() {
-  return <div>hola mundo sere una grafica uwu</div>;
+  const [data, setData] = React.useState({
+    series: [],
+    options: {
+      labels: [],
+    },
+  });
+
+  const getPresenceData = async () => {
+    try {
+      const response = await getProductsPresence();
+
+      const series = [];
+      const labels = [];
+
+      response.forEach((item) => {
+        series.push(item.presenceShare);
+        labels.push(item.name);
+      });
+
+      setData({
+        ...data,
+        series,
+        options: {
+          ...data.options,
+          labels,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getPresenceData();
+  }, []);
+
+  return (
+    <div style={{ height: "100%" }}>
+      hola mundo
+      <Card>
+        <ReactApexChart
+          options={data.options}
+          series={data.series}
+          type="pie"
+        />
+      </Card>
+    </div>
+  );
 }

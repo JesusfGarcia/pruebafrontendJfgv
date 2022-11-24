@@ -3,6 +3,7 @@ import React from "react";
 import { getPricesEvolution } from "../../services";
 
 import ReactApexChart from "react-apexcharts";
+import Card from "../Card";
 
 export default function PriceEvolutionChart() {
   const [data, setData] = React.useState({
@@ -114,14 +115,16 @@ export default function PriceEvolutionChart() {
   }, []);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <span>Price Evolution</span>
-      <ReactApexChart
-        options={data.options}
-        series={data.series}
-        type="line"
-        height={350}
-      />
+      <Card>
+        <ReactApexChart
+          options={data.options}
+          series={data.series}
+          type="line"
+          height={350}
+        />
+      </Card>
     </div>
   );
 }
