@@ -12,7 +12,7 @@
     "title title"
     "priceEv presence"
     "tabl tabl";
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 3fr minmax(300px, 500px);
   grid-template-rows: 55px 400px 1fr;
   gap: 20px;
   padding: 20px;
