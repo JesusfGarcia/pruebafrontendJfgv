@@ -13,10 +13,7 @@ export default function Table() {
     try {
       const response = await getProductsTable();
       setRows(response);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   React.useEffect(() => {
@@ -24,7 +21,7 @@ export default function Table() {
   }, []);
 
   return (
-    <div>
+    <div className="tableContainer">
       <Subtitle>Comparative Analysis</Subtitle>
       <table>
         <thead>
@@ -46,7 +43,7 @@ export default function Table() {
                       loading="lazy"
                       alt="product-logo"
                       src={product.productImage}
-                      height="80px"
+                      height={80}
                     />
                     <span>{product.name}</span>
                   </div>

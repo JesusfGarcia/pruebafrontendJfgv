@@ -33,6 +33,31 @@ export default function PriceEvolutionChart() {
           },
         },
       },
+      responsive: [
+        {
+          breakpoint: 1030,
+          options: {
+            chart: {
+              width: 580,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+        {
+          breakpoint: 620,
+          options: {
+            chart: {
+              width: 350,
+            },
+            legend: {
+              position: "bottom",
+              show: false,
+            },
+          },
+        },
+      ],
     },
   });
 

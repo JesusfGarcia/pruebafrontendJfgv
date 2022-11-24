@@ -11,6 +11,27 @@ export default function PresenceChart() {
     options: {
       labels: [],
       colors: ["#d6215b", "#006fff", "#23b794", "#ff7a00", "#7540b2"],
+      responsive: [
+        {
+          breakpoint: 1030,
+          options: {
+            chart: {
+              width: 580,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+        {
+          breakpoint: 620,
+          options: {
+            chart: {
+              width: 300,
+            },
+          },
+        },
+      ],
     },
   });
 
