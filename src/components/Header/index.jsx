@@ -7,7 +7,7 @@ import "./styles.css";
 export default function Header() {
   return (
     <header>
-      <img height={60} src={Logo} alt="Atlantia Search Logo" />
+      <img width={148} height={60} src={Logo} alt="Atlantia Search Logo" />
     </header>
   );
 }

@@ -69,6 +69,7 @@ export default function Table() {
                       alt="product-logo"
                       src={product.productImage}
                       height={80}
+                      width={74}
                     />
                     <span>{product.name}</span>
                   </div>
