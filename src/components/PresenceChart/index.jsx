@@ -3,6 +3,7 @@ import ReactApexChart from "react-apexcharts";
 
 import { getProductsPresence } from "../../services";
 import Card from "../Card";
+import Subtitle from "../Subtitle";
 
 export default function PresenceChart() {
   const [data, setData] = React.useState({
@@ -15,7 +16,6 @@ export default function PresenceChart() {
   const getPresenceData = async () => {
     try {
       const response = await getProductsPresence();
-
       const series = [];
       const labels = [];
 
@@ -43,7 +43,7 @@ export default function PresenceChart() {
 
   return (
     <div style={{ height: "100%" }}>
-      hola mundo
+      <Subtitle>Presence Share by Product</Subtitle>
       <Card>
         <ReactApexChart
           options={data.options}

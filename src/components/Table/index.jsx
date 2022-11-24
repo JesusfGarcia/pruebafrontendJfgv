@@ -2,6 +2,7 @@ import React from "react";
 
 import { getProductsTable } from "../../services";
 import PersistenceLabel from "../PersistenceLabel";
+import Subtitle from "../Subtitle";
 
 import "./styles.css";
 
@@ -24,7 +25,7 @@ export default function Table() {
 
   return (
     <div>
-      <span>Comparative Analysis</span>
+      <Subtitle>Comparative Analysis</Subtitle>
       <table>
         <thead>
           <tr>

@@ -4,6 +4,7 @@ import { getPricesEvolution } from "../../services";
 
 import ReactApexChart from "react-apexcharts";
 import Card from "../Card";
+import Subtitle from "../Subtitle";
 
 export default function PriceEvolutionChart() {
   const [data, setData] = React.useState({
@@ -116,7 +117,7 @@ export default function PriceEvolutionChart() {
 
   return (
     <div style={{ height: "100%" }}>
-      <span>Price Evolution</span>
+      <Subtitle>Price Evolution</Subtitle>
       <Card>
         <ReactApexChart
           options={data.options}

@@ -1,21 +1,22 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .content {
   display: grid;
-  height: 100vh;
   box-sizing: border-box;
   grid-template-areas:
-    "priceEv priceEv presence"
-    "tabl tabl  tabl";
-  grid-template-columns: repeat(3, 1fr);
+    "title title"
+    "priceEv presence"
+    "tabl tabl";
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 55px 400px 1fr;
   gap: 20px;
   padding: 20px;
   background-color: #f0f6ff;
-  margin-bottom: 20px;
+  overflow-y: scroll;
 }
 
 .priceEv {
@@ -28,4 +29,10 @@
 
 .tabl {
   grid-area: tabl;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.title {
+  grid-area: title;
 }
