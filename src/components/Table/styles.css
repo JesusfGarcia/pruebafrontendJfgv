@@ -1,5 +1,7 @@
 .tableContainer {
   overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 table {

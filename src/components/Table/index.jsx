@@ -6,19 +6,44 @@ import Subtitle from "../Subtitle";
 
 import "./styles.css";
 
+import Loading from "../Loading";
+import ErrorMsg from "../ErrorMsg";
+
 export default function Table() {
   const [rows, setRows] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
   const getInformation = async () => {
     try {
       const response = await getProductsTable();
       setRows(response);
-    } catch (error) {}
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError("Ocurrió un error con la conexión al servidor");
+    }
   };
 
   React.useEffect(() => {
     getInformation();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="tableContainer">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="tableContainer">
+        <ErrorMsg>{error}</ErrorMsg>
+      </div>
+    );
+  }
 
   return (
     <div className="tableContainer">
