@@ -10,8 +10,12 @@ export default function PresenceChart() {
     series: [],
     options: {
       labels: [],
+      colors: ["#d6215b", "#006fff", "#23b794", "#ff7a00", "#7540b2"],
     },
   });
+
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
   const getPresenceData = async () => {
     try {
@@ -32,8 +36,11 @@ export default function PresenceChart() {
           labels,
         },
       });
+
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setError("Error al cargar los datos :(");
     }
   };
 
@@ -44,7 +51,7 @@ export default function PresenceChart() {
   return (
     <div style={{ height: "100%" }}>
       <Subtitle>Presence Share by Product</Subtitle>
-      <Card>
+      <Card isLoading={isLoading} error={error}>
         <ReactApexChart
           options={data.options}
           series={data.series}

@@ -10,10 +10,7 @@ export default function PriceEvolutionChart() {
   const [data, setData] = React.useState({
     series: [],
     options: {
-      chart: {
-        height: 350,
-        type: "line",
-      },
+      colors: ["#d6215b", "#ff7a00", "#7540b2"],
       stroke: {
         curve: "smooth",
       },
@@ -30,7 +27,7 @@ export default function PriceEvolutionChart() {
         y: {
           formatter: function (y) {
             if (typeof y !== "undefined") {
-              return y.toFixed(0) + " points";
+              return `$${y.toFixed(2)}`;
             }
             return y;
           },
@@ -39,10 +36,12 @@ export default function PriceEvolutionChart() {
     },
   });
 
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
+
   const getInformation = async () => {
     try {
       const response = await getPricesEvolution();
-
       const series = [];
       const labels = [];
 
@@ -77,37 +76,10 @@ export default function PriceEvolutionChart() {
         },
       });
 
-      //recorrere los elementos para ordenarlos por fechas
-      /* response.forEach((element) => {
-        const index = dates.findIndex(
-          (item) => item.dateExtraction === element.dateExtraction
-        );
-        if (index !== -1) {
-          const uniqueObject = dates[index];
-          uniqueObject.data.push(element);
-        } else {
-          dates.push({
-            dateExtraction: element.dateExtraction,
-            data: [element],
-          });
-        }
-      });
-
-      //ordenaremos las fechas en orden cronologico
-      const newDates = dates.sort((a, b) => {
-        if (a.dateExtraction > b.dateExtraction) {
-          return 1;
-        }
-        if (a.dateExtraction < b.dateExtraction) {
-          return -1;
-        }
-
-        return 0;
-      });
-
-      console.log("newDates", newDates); */
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      setIsLoading(false);
+      setError("Error al cargar los datos :(");
     }
   };
 
@@ -118,7 +90,7 @@ export default function PriceEvolutionChart() {
   return (
     <div style={{ height: "100%" }}>
       <Subtitle>Price Evolution</Subtitle>
-      <Card>
+      <Card isLoading={isLoading} error={error}>
         <ReactApexChart
           options={data.options}
           series={data.series}
