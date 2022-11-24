@@ -68,36 +68,75 @@ export default function PriceEvolutionChart() {
     try {
       const response = await getPricesEvolution();
       const series = [];
-      const labels = [];
 
-      response.forEach((element) => {
-        const index = series.findIndex((item) => item.sku === element.sku);
-        if (index !== -1) {
-          const uniqueObject = series[index];
-          uniqueObject.data.push(element.price);
-        } else {
-          series.push({
-            sku: element.sku,
-            name: element.name,
-            data: [element.price],
-            type: "line",
-          });
-        }
-
-        const labelIndex = labels.findIndex(
-          (item) => item === element.dateExtraction
-        );
-        if (labelIndex === -1) {
-          labels.push(element.dateExtraction);
+      //creamos lista de fechas disponibles
+      const dates = [];
+      const skus = [];
+      response.forEach((item) => {
+        const isRepited = skus.find((sku) => sku === item.sku);
+        if (!isRepited) {
+          skus.push(item.sku);
         }
       });
 
+      response.forEach((item) => {
+        const isRepited = dates.find((date) => date === item.dateExtraction);
+        if (!isRepited) {
+          dates.push(item.dateExtraction);
+        }
+      });
+
+      //ordenamos las fechas
+      const sortedDates = dates.sort((a, b) => {
+        if (a > b) {
+          return 1;
+        }
+        if (a < b) {
+          return -1;
+        }
+        return 0;
+      });
+
+      sortedDates.forEach((date) => {
+        skus.forEach((sku) => {
+          const product = response.find(
+            (item) => item.sku === sku && item.dateExtraction === date
+          );
+          if (!product) {
+            const index = series.findIndex((item) => item.sku === sku);
+            if (index !== -1) {
+              const uniqueObject = series[index];
+              return uniqueObject.data.push(
+                uniqueObject.data[uniqueObject.data.length - 1]
+              );
+            }
+          }
+
+          const index = series.findIndex((item) => item.sku === product.sku);
+          if (index !== -1) {
+            const uniqueObject = series[index];
+            return uniqueObject.data.push(product.price);
+          }
+          return series.push({
+            sku: product.sku,
+            name: product.name,
+            data: [product.price],
+            type: "line",
+          });
+        });
+      });
+
+      const labels = dates.map((date) => {
+        const dateString = new Date(date).toDateString();
+        const dateArray = dateString.split(" ");
+        return `${dateArray[1]} ${dateArray[2]}`;
+      });
+
       setData({
-        ...data,
-        series: series,
+        series,
         options: {
           ...data.options,
-          labels: labels,
+          labels,
         },
       });
 
