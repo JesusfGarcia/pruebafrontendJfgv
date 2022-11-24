@@ -1,0 +1,30 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: grid;
+  height: 100vh;
+  box-sizing: border-box;
+  grid-template-areas:
+    "priceEv priceEv presence"
+    "tabl tabl tabl";
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  background-color: #f0f6ff;
+}
+
+.priceEv {
+  grid-area: priceEv;
+}
+
+.presence {
+  grid-area: presence;
+}
+
+.tabl {
+  grid-area: tabl;
+}

@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #a6a6a7;
+}
+
+th {
+  padding: 10px;
+  text-align: center;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+tbody tr {
+  background-color: #fff;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #e9e9e9;
+}
+
+.name-image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.name-image img {
+  height: 80px;
+}
